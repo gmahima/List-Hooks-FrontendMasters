@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer} from 'react';
 
 import id from 'uuid/v4';
 
@@ -11,7 +11,10 @@ const GRUDGE_ADD = 'GRUDGE_ADD';
 const GRUDGE_FORGIVE = 'GRUDGE_FORGIVE';
 
 const reducer = (state, action) => {
-  return state
+
+console.log(state)
+  return [action.payload, ...state]
+
 }
 
 const App = () => {
@@ -19,7 +22,18 @@ const App = () => {
 
 
 
+  const addGrudge = ({person, reason}) => {
+    dispatch({
+      type: GRUDGE_ADD,
+      payload: {
+        person,
+        reason,
+        forgiven: false,
+        id: id()
 
+      }
+    })
+  }
   const toggleForgiveness = id => {
     // setGrudges(
     //   grudges.map(grudge => {
