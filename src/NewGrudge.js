@@ -3,12 +3,13 @@ import {GrudgeContext} from './GrudgeContext'
 
 const NewGrudge = memo(() => {
   //memo dosent work with context
+  const {addGrudge} = useContext(GrudgeContext)
   const [person, setPerson] = useState('');
   const [reason, setReason] = useState('');
 
   const handleChange = event => {
     event.preventDefault();
-    onSubmit({ person, reason });
+    addGrudge({ person, reason });
   };
 
   return (
