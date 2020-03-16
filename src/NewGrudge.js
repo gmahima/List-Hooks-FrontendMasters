@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const NewGrudge = ({ onSubmit }) => {
+  //renders only initially since onSubmit(addGrudge) is wrapped in useCallback with dependency as dispatch &memo is used here
   const [person, setPerson] = useState('');
   const [reason, setReason] = useState('');
 

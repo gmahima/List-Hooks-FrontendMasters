@@ -52,22 +52,15 @@ const App = () => {
     })
   }, [dispatch])
   const toggleForgiveness = useCallback(id => {
-    // setGrudges(
-    //   grudges.map(grudge => {
-    //     if (grudge.id !== id) return grudge;
-    //     return { ...grudge, forgiven: !grudge.forgiven };
-    //   })
-    // );
-
-    // const grudge = grudges.find((g) => g.id === id)
-    console.log("hi")
     dispatch({
       type: GRUDGE_FORGIVE,
       payload: {
         id
       }
     })
-  }, [dispatch])
+  }, [dispatch])//if not wrapped in useCallback, a new function is created by js every time app reloads...so when it is wrapped,
+  //then it will change only when dependency(dispatch) changes, but dispatch, like ref is the same reference across rerenders.
+  // so it dosent change & new functions are not created on every reload & react.memo can be used to check if intended props change
 
   return (
     <div className="Application">
