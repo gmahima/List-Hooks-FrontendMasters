@@ -11,9 +11,26 @@ const GRUDGE_ADD = 'GRUDGE_ADD';
 const GRUDGE_FORGIVE = 'GRUDGE_FORGIVE';
 
 const reducer = (state, action) => {
-
-console.log(state)
-  return [action.payload, ...state]
+  if(action.type === GRUDGE_ADD){
+    return [action.payload, ...state]
+  }
+  else if(action.type === GRUDGE_FORGIVE){
+    let arr = state.map((item) => {
+      console.log(action.payload.id)
+      if(item.id === action.payload.id) {
+        console.log("id", item.id)
+        return (
+          {...item, forgiven: !item.forgiven}
+        )
+        
+      }
+      return item
+    })
+    console.log(arr)
+    return arr
+  }
+  return state
+  
 
 }
 
@@ -41,6 +58,15 @@ const App = () => {
     //     return { ...grudge, forgiven: !grudge.forgiven };
     //   })
     // );
+
+    // const grudge = grudges.find((g) => g.id === id)
+    console.log("hi")
+    dispatch({
+      type: GRUDGE_FORGIVE,
+      payload: {
+        id
+      }
+    })
   };
 
   return (
