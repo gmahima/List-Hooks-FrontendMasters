@@ -1,4 +1,4 @@
-import React, { useReducer} from 'react';
+import React, { useReducer, useCallback} from 'react';
 
 import id from 'uuid/v4';
 
@@ -39,7 +39,7 @@ const App = () => {
 
 
 
-  const addGrudge = ({person, reason}) => {
+  const addGrudge = useCallback(({person, reason}) => {
     dispatch({
       type: GRUDGE_ADD,
       payload: {
@@ -50,8 +50,8 @@ const App = () => {
 
       }
     })
-  }
-  const toggleForgiveness = id => {
+  }, [dispatch])
+  const toggleForgiveness = useCallback(id => {
     // setGrudges(
     //   grudges.map(grudge => {
     //     if (grudge.id !== id) return grudge;
@@ -67,7 +67,7 @@ const App = () => {
         id
       }
     })
-  };
+  }, [dispatch])
 
   return (
     <div className="Application">
@@ -75,6 +75,6 @@ const App = () => {
       <Grudges grudges={grudges} onForgive={toggleForgiveness} />
     </div>
   );
-};
+}
 
 export default App;
